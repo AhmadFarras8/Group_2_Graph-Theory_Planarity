@@ -215,7 +215,7 @@ This command runs the available test cases and displays whether they pass or fai
 ### Schmidt's Algorithm
 
 ```text
-To test the program, run `schmidt_planarity.py` and manually enter the vertices and edges for test graphs (such as $K_4$, $K_5$, or $K_{3,3}$) when prompted by the terminal to verify the results.
+To test the program, run `schmidt_planarity.py` and manually enter the vertices and edges for test graphs (such as `K4`, `K5`, or `K3,3`) when prompted by the terminal to verify the results.
 ```
 
 ## Sample Run Result
