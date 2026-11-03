@@ -34,7 +34,9 @@ The algorithm maintains an already-embedded subgraph and processes incoming vert
 
 Placing vertices incrementally using efficient stack structures means the algorithm avoids costly global searches, achieving an optimal $O(V)$ linear-time complexity. This makes Schmidt's algorithm significantly faster on large graphs compared to quadratic face-embedding methods like DMP.
 
-#### Steps
+## Steps
+
+### DMP
 
 1. Find any cycle in the component and draw it as the initial H. It has two faces (inside and outside).
 2. Compute all fragments of H in G.
@@ -47,6 +49,16 @@ Placing vertices incrementally using efficient stack structures means the algori
 Placing forced fragments first means the algorithm never has to undo a choice. A planar graph has at most 3v − 6 edges, so there are only O(v) path insertions, each costing O(v), which gives an overall running time of **O(v²)**.
 
 The main drawback of DMP is that it is quadratic, so it is slower than the linear-time Left-Right test on large graphs, and it requires the graph to be split into biconnected components first.
+
+### Schmidt's Algorithm
+
+1. Find any cycle in the component and draw it as the initial $H$. It has two faces (inside and outside).
+2. Compute all fragments of $H$ in $G$.
+3. For each fragment, find its admissible faces.
+4. If any fragment has no admissible face, stop: the graph is non-planar.
+5. Otherwise, choose a fragment, preferring one with exactly one admissible face, since its placement is forced.
+6. Pick a path through the chosen fragment between two of its attachment vertices, draw it inside an admissible face (splitting that face in two), and add it to $H$.
+7. Repeat from step 2 until every edge is in $H$. Then the graph is planar, and the faces of $H$ form a valid embedding.
 
 ## Implementations
 
