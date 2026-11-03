@@ -32,3 +32,5 @@ The algorithm keeps an already-drawn subgraph **H**, whose edges divide the plan
 Placing forced fragments first means the algorithm never has to undo a choice. A planar graph has at most 3v − 6 edges, so there are only O(v) path insertions, each costing O(v), which gives an overall running time of **O(v²)**.
 
 The main drawback of DMP is that it is quadratic, so it is slower than the linear-time Left-Right test on large graphs, and it requires the graph to be split into biconnected components first.
+
+## Implementations
