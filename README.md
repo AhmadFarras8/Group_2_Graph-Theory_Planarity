@@ -19,6 +19,21 @@ The algorithm keeps an already-drawn subgraph **H**, whose edges divide the plan
 - **Attachment vertices:** the vertices of a fragment that lie on H.
 - **Admissible face:** a face of H whose boundary contains all attachment vertices of a fragment. A fragment can only be drawn inside an admissible face.
 
+### Schmidt's Algorithm
+
+Schmidt’s algorithm is an efficient, incremental vertex-addition planarity test. Instead of searching for a forbidden subgraph or checking global conflict graphs, it constructs a planar embedding by adding vertices one by one in a specific order derived from a Depth-First Search (DFS) tree. If all vertices can be added and successfully embedded into active face boundaries without edge crossings, the graph is planar. If any vertex or its incident edges cannot be accommodated, the algorithm stops and correctly classifies the graph as non-planar.
+
+Because planarity applies to a graph if and only if each of its biconnected components is planar, the algorithm first decomposes the graph into biconnected components (blocks) using Tarjan's DFS technique. Each block is then processed independently to ensure that articulation points or disconnected components do not interfere with the overall evaluation.
+
+The algorithm maintains an already-embedded subgraph and processes incoming vertices by examining how they connect to existing parts of the structure. The approach relies on several key concepts:
+
+- **DFS Vertex Ordering:** Vertices are ordered via a Depth-First Search tree traversal, ensuring that when a vertex is added, its tree connections and back-edges link properly to the portion of the graph that has already been processed.
+- **Base Embedding:** The process begins with a small initial biconnected subgraph (such as a fundamental cycle) with established inside and outside face boundaries.
+- **Attachment Points:** For each incoming vertex, the algorithm identifies its incident edges connecting to vertices already present in the embedded subgraph.
+- **Face Admissibility & Stacks:** The algorithm uses stack-based data structures to dynamically track and manage active face segments. It checks whether the incoming edges can fit into the current face boundaries without crossing any existing lines.
+
+Placing vertices incrementally using efficient stack structures means the algorithm avoids costly global searches, achieving an optimal $O(V)$ linear-time complexity. This makes Schmidt's algorithm significantly faster on large graphs compared to quadratic face-embedding methods like DMP.
+
 #### Steps
 
 1. Find any cycle in the component and draw it as the initial H. It has two faces (inside and outside).
