@@ -105,7 +105,7 @@ Edges:
 The project also includes `test_dmp.py`, which contains test cases for the implementation. To execute the tests, run the following command from the project directory:
 
 ```bash
-python -m unittest test_dmp.py
+python -m unittest -v test_dmp.py
 ```
 
 This command runs the available test cases and displays whether they pass or fail.
