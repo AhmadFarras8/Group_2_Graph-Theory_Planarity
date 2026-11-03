@@ -353,7 +353,7 @@ Graph Analysis Result
 The graph is NON-PLANAR.
 ```
 
-## Promp History
+## Prompt History
 
 ### DMP
 
