@@ -217,3 +217,104 @@ The graph is NON-PLANAR.
 ```
 
 These examples illustrate how the implementation identifies whether a graph can be embedded in a plane without any edges crossing. The triangle graph is planar, while the complete graph K5 is non-planar.
+
+### Schmidt's Algorithm
+
+Before running the Schmidt's Planarity Checker, make sure the following requirements are met:
+
+- **Python 3:** Installed on your computer.
+- **Code Editor (Optional):** Visual Studio Code, PyCharm, or another editor for viewing and modifying the source code.
+- **Project Files:** All files extracted from `DMP.zip` and placed in the same directory.
+- **Third-Party Libraries:** None required, as the program uses standard Python libraries.
+
+#### Running the Program
+
+1. **Create a project folder.** Create a new folder on your computer and name it `schmidt_project`.
+
+2. **Create the source file.** Inside the `schmidt_project` folder, create a new file named `schmidt_planarity.py` and paste the source code into it.
+
+3. **Open the project directory.** Open the `schmidt_project` folder using a terminal, command prompt, or Visual Studio Code integrated terminal.
+
+4. **Run the program.** Execute the following command:
+
+   ```bash
+   python schmidt_planarity.py
+   ```
+
+   If the command above does not work, try:
+
+   ```bash
+   python3 schmidt_planarity.py
+   ```
+
+5. View the result. The program automatically processes the built-in test cases using Schmidt’s vertex-addition algorithm and displays whether each graph is planar or non-planar along with its pass/fail status.
+
+### Example Input
+The script includes built-in test cases representing graphs like $K_4$ and $K_5$:
+```Python
+# Example graph initialization in schmidt_planarity.py:
+g_k4 = Graph(4)
+for u, v in [(0, 1), (0, 2), (0, 3), (1, 2), (1, 3), (2, 3)]:
+    g_k4.add_edge(u, v)
+```
+
+## Sample Run Result
+
+### Schmidt's Algorithm
+The following examples demonstrate how Schmidt's Vertex-Addition Planarity Checker processes graph inputs and displays the results.
+
+#### Example 1: Planar Graph (K4)
+**Input:**
+```text
+Number of vertices: 4
+Number of edges: 6
+
+Edges:
+0 1
+0 2
+0 3
+1 2
+1 3
+2 3
+```
+
+**Output:**
+```text
+==================================================
+  SCHMIDT'S VERTEX-ADDITION PLANARITY CHECKER
+==================================================
+
+Test Case: Complete Graph K4
+  - Vertices: 4, Edges: 6
+  - Schmidt's Algorithm Result : Planar
+  - Expected Output            : Planar
+  - Status                     : PASSED
+```
+
+#### Example 2: Non-Planar Graph (K5)
+**Input:**
+```text
+Number of vertices: 5
+Number of edges: 10
+
+Edges:
+0 1
+0 2
+0 3
+0 4
+1 2
+1 3
+1 4
+2 3
+2 4
+3 4
+```
+
+**Output:**
+```text
+Test Case: Complete Graph K5
+  - Vertices: 5, Edges: 10
+  - Schmidt's Algorithm Result : Non-Planar
+  - Expected Output            : Non-Planar
+  - Status                     : PASSED
+```
