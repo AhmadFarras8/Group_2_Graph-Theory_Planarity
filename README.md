@@ -37,86 +37,77 @@ The main drawback of DMP is that it is quadratic, so it is slower than the linea
 
 ## DMP
 
-The DMP Planarity Checker is implemented in Python using an adjacency-list representation of an undirected graph. The implementation is divided into several functions, with each function handling a specific part of the planarity-testing process.
+The DMP Planarity Checker is implemented in Python using an adjacency-list representation of an undirected graph. Each vertex is stored as a key in a dictionary, while its neighboring vertices are stored in a set. This structure allows the program to access adjacent vertices and manage graph connections efficiently.
 
-#### 1. Graph Representation
+The implementation begins by decomposing the graph into biconnected components, also known as blocks. This process is handled by the `find_biconnected_components()` function, which uses Tarjan's Depth-First Search (DFS) technique. Dividing the graph into smaller components allows the algorithm to process each block independently, including graphs that contain articulation points or disconnected components.
 
-The graph is represented using a dictionary in which each vertex stores a set of its adjacent vertices. This structure makes it easier to access neighboring vertices and check whether an edge exists.
+For each non-trivial biconnected component, the algorithm searches for an initial cycle using the `find_cycle()` function. This cycle serves as the starting point for constructing the planar embedding. Its vertices and edges are marked as embedded, while the two sides of the cycle are represented as the initial faces. These faces provide the initial spaces into which the remaining parts of the graph can be inserted.
 
-For example, an edge between vertices `0` and `1` is stored in both adjacency lists because the graph is undirected.
+After establishing the initial cycle, the `get_fragments()` function identifies the remaining parts of the graph that have not yet been embedded. These fragments can be connected groups of unembedded vertices or unused edges connecting vertices that are already part of the embedding. The vertices where a fragment connects to the embedded subgraph are called contact vertices. Identifying these fragments and their contact vertices is essential for determining where each fragment can be inserted.
 
-Before processing the graph, the program also checks the input to ensure that every edge connects declared vertices and that no self-loops are included.
+The algorithm then uses the `admissible_faces()` function to determine which existing faces can accommodate each fragment. A face is considered admissible when its boundary contains all the contact vertices of the fragment. The algorithm prioritizes fragments with fewer admissible faces because they have fewer possible insertion locations. If a fragment has no admissible face, the current embedding cannot be extended, and the corresponding block is classified as non-planar.
 
-#### 2. Biconnected Component Decomposition
+Once an admissible face has been selected, the `find_alpha_path()` function searches for a path connecting two contact vertices through the selected fragment. This path is known as an alpha-path. The `split_face()` function then inserts the path into the selected face, dividing the original face into two new faces. The embedding information is updated to include the newly inserted vertices and edges. This process is repeated until all fragments have been processed or no valid insertion is possible.
 
-The function `find_biconnected_components()` uses Tarjan's Depth-First Search (DFS) technique to divide the graph into biconnected components, also called blocks.
+The overall process is coordinated by the `test_block_dmp()` and `is_planar_dmp()` functions. The `test_block_dmp()` function performs the DMP procedure on an individual biconnected component, while `is_planar_dmp()` manages the processing of all components and combines their results. If every block can be successfully embedded, the graph is classified as planar. Otherwise, it is classified as non-planar.
 
-This step is important because a graph may contain articulation points, which are vertices whose removal disconnects the graph. By processing each block separately, the program can handle graphs that contain articulation points or disconnected components.
+Overall, the implementation follows the main idea of the DMP algorithm by gradually constructing a planar embedding through the insertion of fragments into admissible faces. Each function handles a specific stage of the process, making the implementation easier to understand, organize, and maintain.
 
-#### 3. Finding the Initial Cycle
+## How to Run & Prerequisites
 
-The function `find_cycle()` searches for a simple cycle inside each non-trivial biconnected component.
+### DMP
 
-This cycle becomes the starting point of the planar embedding. The program initially creates two faces from the cycle, representing its two sides.
 
-The vertices and edges belonging to the initial cycle are marked as embedded so that the algorithm can identify the remaining parts of the graph.
+#### Prerequisites
 
-#### 4. Identifying Fragments
+Before running the DMP Planarity Checker, make sure the following requirements are met:
 
-The function `get_fragments()` identifies the remaining parts of the graph that have not yet been inserted into the embedding.
+- **Python 3:** Installed on your computer.
+- **Code Editor (Optional):** Visual Studio Code, PyCharm, or another editor for viewing and modifying the source code.
+- **Project Files:** All files extracted from `DMP.zip` and placed in the same directory.
+- **Third-Party Libraries:** None required, as the program uses standard Python libraries.
 
-There are two types of fragments:
+#### Running the Program
 
-- **Component fragments:** Connected groups of unembedded vertices and their edges connecting them to already embedded vertices.
-- **Chord fragments:** Unused edges that connect two vertices that are already part of the embedded subgraph.
+1. **Extract the project files.** Extract `DMP.zip` into a directory on your computer.
 
-The vertices where a fragment connects to the embedded subgraph are called its contact vertices.
+2. **Open the project directory.** Open the extracted folder using a terminal or command prompt.
 
-#### 5. Checking Admissible Faces
+3. **Run the program.** Execute the following command:
 
-The function `admissible_faces()` determines which existing faces can accommodate a particular fragment.
+   ```bash
+   python main.py
+   ```
 
-A face is considered admissible when all contact vertices of the fragment are present on that face's boundary.
+   If the command above does not work, try:
 
-The algorithm calculates the admissible faces for each remaining fragment and prioritizes the fragment with the fewest available faces.
+   ```bash
+   python3 main.py
+   ```
 
-If a fragment has no admissible face, the program reports that the current embedding cannot be extended and classifies the block as non-planar.
+4. **Enter the graph information.** Follow the instructions displayed in the terminal to enter the number of vertices, the number of edges, and the endpoints of each edge.
 
-#### 6. Finding an Alpha-Path
+5. **View the result.** The program processes the graph using the DMP Planarity algorithm and displays whether the graph is planar or non-planar, along with additional embedding information when available.
 
-The function `find_alpha_path()` searches for a path connecting two contact vertices through the selected fragment.
+### Example Input
 
-This path is called an **alpha-path**. Its endpoints must lie on the selected face, while its internal vertices belong to the unembedded part of the fragment.
+The following example represents a triangle graph consisting of three vertices and three edges:
 
-For chord fragments, the alpha-path is simply the unused edge connecting the two contact vertices.
+```text
+Number of vertices: 3
+Number of edges: 3
+Edges:
+0 1
+1 2
+2 0
+```
 
-#### 7. Updating the Planar Embedding
+#### Running the Tests
 
-After finding an alpha-path, the function `split_face()` inserts the path into the selected face.
+The project also includes `test_dmp.py`, which contains test cases for the implementation. To execute the tests, run the following command from the project directory:
 
-The inserted path divides the original face into two new faces. The program then updates the face list, marks the path's edges as used, and adds its vertices to the embedded subgraph.
+```bash
+python -m unittest test_dmp.py
+```
 
-This process is repeated until all fragments have been processed or a fragment with no admissible face is found.
-
-#### 8. Final Planarity Result
-
-The main algorithm is handled by `test_block_dmp()` and `is_planar_dmp()`.
-
-- `test_block_dmp()` performs the DMP process on one biconnected component.
-- `is_planar_dmp()` processes all components and combines their results.
-
-If every block can be embedded without encountering a fragment that has no admissible face, the graph is classified as planar. Otherwise, the graph is classified as non-planar.
-
-The program returns the result together with information about the blocks, embedding faces, and processing steps.
-
-#### 9. Command-Line Interface
-
-The file `main.py` provides a simple command-line interface for interacting with the algorithm.
-
-The user enters the number of vertices, the number of edges, and the endpoints of each edge. The program passes this input to `is_planar_dmp()` and displays whether the graph is planar or non-planar.
-
-For planar graphs, the program also displays the resulting face boundaries. For non-planar graphs, it displays the block and the processing information that led to the result.
-
-#### Implementation Note
-
-This project is an educational implementation of the DMP path-insertion approach. It prioritizes clarity and understanding of the algorithm over optimization. Its implementation and results should be checked against additional test graphs before being used as a general-purpose planarity checker.
+This command runs the available test cases and displays whether they pass or fail.
