@@ -148,7 +148,7 @@ Before running the Schmidt's Planarity Checker, make sure the following requirem
 
 5. **View the result.** The program processes the graph using the DMP Planarity algorithm and displays whether the graph is planar or non-planar, along with additional embedding information when available.
 
-### Schmidt
+### Schmidt's Algorithm
 
 1. **Extract the project files.** Extract `schmidt_project.zip` into a directory on your computer.
 
