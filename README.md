@@ -58,8 +58,6 @@ Overall, the implementation follows the main idea of the DMP algorithm by gradua
 ### DMP
 
 
-#### Prerequisites
-
 Before running the DMP Planarity Checker, make sure the following requirements are met:
 
 - **Python 3:** Installed on your computer.
