@@ -109,3 +109,62 @@ python -m unittest test_dmp.py
 ```
 
 This command runs the available test cases and displays whether they pass or fail.
+
+## Sample Run Result
+
+### DMP
+
+The following examples demonstrate how the DMP Planarity Checker processes graph inputs and displays the results.
+
+#### Example 1: Planar Graph
+
+**Input:**
+```text
+Number of vertices: 3
+Number of edges: 3
+
+Edges:
+0 1
+1 2
+2 0
+```
+
+**Output:**
+```text
+Graph Analysis Result
+---------------------
+The graph is PLANAR.
+
+Planar embedding:
+Vertices: 0, 1, 2
+Edges: (0, 1), (1, 2), (2, 0)
+```
+
+#### Example 2: Non-Planar Graph (K5)
+
+**Input:**
+```text
+Number of vertices: 5
+Number of edges: 10
+
+Edges:
+0 1
+0 2
+0 3
+0 4
+1 2
+1 3
+1 4
+2 3
+2 4
+3 4
+```
+
+**Output:**
+```text
+Graph Analysis Result
+---------------------
+The graph is NON-PLANAR.
+```
+
+These examples illustrate how the implementation identifies whether a graph can be embedded in a plane without any edges crossing. The triangle graph is planar, while the complete graph K5 is non-planar.
