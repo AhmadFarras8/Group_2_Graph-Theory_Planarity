@@ -60,6 +60,10 @@ The main drawback of DMP is that it is quadratic, so it is slower than the linea
 6. Pick a path through the chosen fragment between two of its attachment vertices, draw it inside an admissible face (splitting that face in two), and add it to $H$.
 7. Repeat from step 2 until every edge is in $H$. Then the graph is planar, and the faces of $H$ form a valid embedding.
 
+By adding vertices one by one using efficient stack data structures to track faces, the algorithm runs in an optimal $O(v)$ linear time.
+
+The main drawback of Schmidt’s algorithm is its high implementation complexity, as managing active face stacks requires intricate pointer and stack logic. However, because it runs in linear time, it is significantly faster than quadratic algorithms like DMP on large graphs.
+
 ## Implementations
 
 ## DMP
