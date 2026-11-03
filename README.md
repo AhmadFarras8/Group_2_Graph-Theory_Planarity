@@ -114,7 +114,19 @@ Before running the DMP Planarity Checker, make sure the following requirements a
 - **Project Files:** All files extracted from `DMP.zip` and placed in the same directory.
 - **Third-Party Libraries:** None required, as the program uses standard Python libraries.
 
+### Schmidt's Algorithm
+
+
+Before running the Schmidt's Planarity Checker, make sure the following requirements are met:
+
+- **Python 3:** Installed on your computer.
+- **Code Editor (Optional):** Visual Studio Code, PyCharm, or another editor for viewing and modifying the source code.
+- **Project Files:** All files extracted from `schmidt_project.zip` and placed in the same directory.
+- **Third-Party Libraries:** None required, as the program uses standard Python libraries.
+
 #### Running the Program
+
+### DMP
 
 1. **Extract the project files.** Extract `DMP.zip` into a directory on your computer.
 
@@ -136,9 +148,34 @@ Before running the DMP Planarity Checker, make sure the following requirements a
 
 5. **View the result.** The program processes the graph using the DMP Planarity algorithm and displays whether the graph is planar or non-planar, along with additional embedding information when available.
 
+### Schmidt
+
+1. **Extract the project files.** Extract `schmidt_project.zip` into a directory on your computer.
+
+2. **Open the project directory.** Open the extracted folder using a terminal or command prompt.
+
+3. **Run the program.** Execute the following command:
+
+   ```bash
+   python schmidt_planarity.py
+   ```
+
+   If the command above does not work, try:
+
+   ```bash
+   python3 schmidt_planarity.py
+   ```
+
+4. **Enter the graph information.** Follow the instructions displayed in the terminal to enter the number of vertices, the number of edges, and the endpoints of each edge.
+
+5. **View the result.** The program processes the graph using Schmidt's Planarity algorithm and displays whether the graph is planar or non-planar.
+
 ### Example Input
 
 The following example represents a triangle graph consisting of three vertices and three edges:
+
+
+### DMP
 
 ```text
 Number of vertices: 3
@@ -149,7 +186,23 @@ Edges:
 2 0
 ```
 
+### Schmidt's Algorithm
+
+```text
+Number of vertices: 4
+Number of edges: 6
+Edges:
+0 1
+0 2
+0 3
+1 2
+1 3
+2 3
+```
+
 #### Running the Tests
+
+### DMP
 
 The project also includes `test_dmp.py`, which contains test cases for the implementation. To execute the tests, run the following command from the project directory:
 
@@ -219,48 +272,6 @@ The graph is NON-PLANAR.
 These examples illustrate how the implementation identifies whether a graph can be embedded in a plane without any edges crossing. The triangle graph is planar, while the complete graph K5 is non-planar.
 
 ### Schmidt's Algorithm
-
-Before running the Schmidt's Planarity Checker, make sure the following requirements are met:
-
-- **Python 3:** Installed on your computer.
-- **Code Editor (Optional):** Visual Studio Code, PyCharm, or another editor for viewing and modifying the source code.
-- **Project Files:** All files extracted from `DMP.zip` and placed in the same directory.
-- **Third-Party Libraries:** None required, as the program uses standard Python libraries.
-
-#### Running the Program
-
-1. **Create a project folder.** Create a new folder on your computer and name it `schmidt_project`.
-
-2. **Create the source file.** Inside the `schmidt_project` folder, create a new file named `schmidt_planarity.py` and paste the source code into it.
-
-3. **Open the project directory.** Open the `schmidt_project` folder using a terminal, command prompt, or Visual Studio Code integrated terminal.
-
-4. **Run the program.** Execute the following command:
-
-   ```bash
-   python schmidt_planarity.py
-   ```
-
-   If the command above does not work, try:
-
-   ```bash
-   python3 schmidt_planarity.py
-   ```
-
-5. View the result. The program automatically processes the built-in test cases using Schmidt’s vertex-addition algorithm and displays whether each graph is planar or non-planar along with its pass/fail status.
-
-### Example Input
-The script includes built-in test cases representing graphs like $K_4$ and $K_5$:
-```Python
-# Example graph initialization in schmidt_planarity.py:
-g_k4 = Graph(4)
-for u, v in [(0, 1), (0, 2), (0, 3), (1, 2), (1, 3), (2, 3)]:
-    g_k4.add_edge(u, v)
-```
-
-## Sample Run Result
-
-### Schmidt's Algorithm
 The following examples demonstrate how Schmidt's Vertex-Addition Planarity Checker processes graph inputs and displays the results.
 
 #### Example 1: Planar Graph (K4)
@@ -280,15 +291,9 @@ Edges:
 
 **Output:**
 ```text
-==================================================
-  SCHMIDT'S VERTEX-ADDITION PLANARITY CHECKER
-==================================================
-
-Test Case: Complete Graph K4
-  - Vertices: 4, Edges: 6
-  - Schmidt's Algorithm Result : Planar
-  - Expected Output            : Planar
-  - Status                     : PASSED
+Graph Analysis Result
+---------------------
+The graph is PLANAR.
 ```
 
 #### Example 2: Non-Planar Graph (K5)
@@ -312,11 +317,34 @@ Edges:
 
 **Output:**
 ```text
-Test Case: Complete Graph K5
-  - Vertices: 5, Edges: 10
-  - Schmidt's Algorithm Result : Non-Planar
-  - Expected Output            : Non-Planar
-  - Status                     : PASSED
+Graph Analysis Result
+---------------------
+The graph is NON-PLANAR.
+```
+
+#### Example 3: Non-Planar Graph ($K_{3,3}$)
+**Input:**
+```text
+Number of vertices: 6
+Number of edges: 9
+
+Edges:
+0 3
+0 4
+0 5
+1 3
+1 4
+1 5
+2 3
+2 4
+2 5
+```
+
+**Output:**
+```text
+Graph Analysis Result
+---------------------
+The graph is NON-PLANAR.
 ```
 
 ## Promp History
@@ -347,4 +375,30 @@ Test Case: Complete Graph K5
 
 * Create sample execution results for both planar and non-planar graphs to demonstrate how the program works.
 
+### Schmidt's Algorithm
 
+* What's a good planar algorithm?
+
+* Explain Schmidt's algorithm, including how it works and the steps to check if a graph is planar.
+
+* I want to code Schmidt's algorithm in Python. Can you help me plan the program and list the main functions?
+
+* How can I set up the graph and get inputs from the terminal?
+
+* Explain how to check if a graph is planar when adding vertices.
+
+* Help me write and fix the functions that track edges and check planarity.
+
+* How can I fix problems with running the script and getting terminal inputs?
+
+* Review my Schmidt code and help me find any mistakes in how it checks planarity.
+
+* Write Python unit tests with planar and non-planar graph examples.
+
+* Use $K_4$, $K_5$, and $K_{3,3}$ as test graphs and explain why each is planar or non-planar.
+
+* Why is my script running automatically instead of waiting for input? Help me fix PowerShell path issues (.\schmidt_planarity.py).
+
+* Help me write a simple README section that explains how the Python code works.
+
+* Show sample inputs and outputs for running the program with planar and non-planar graphs.
