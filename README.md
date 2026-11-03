@@ -318,3 +318,33 @@ Test Case: Complete Graph K5
   - Expected Output            : Non-Planar
   - Status                     : PASSED
 ```
+
+## Promp History
+
+### DMP
+
+* Explain the Demoucron-Malgrange-Pertuiset (DMP) planarity testing algorithm, including its main concept, how it works, and the steps involved in determining whether a graph is planar.
+
+* I want to implement the DMP planarity testing algorithm using Python. Can you help me design the program structure and identify the main functions needed?
+
+* How can I find an initial cycle in a biconnected graph and use it to initialize the faces for the DMP path-insertion process?
+
+* Explain how to identify fragments and their contact vertices in the currently embedded graph.
+
+* Help me implement the admissible face selection process and explain how the algorithm chooses which fragment to process first.
+
+* How can I implement alpha-path insertion and face splitting to update the planar embedding after inserting a path?
+
+* Review my DMP implementation and identify possible logical errors in fragment detection, admissible face calculation, and alpha-path construction.
+
+* Create Python unit tests for my DMP implementation using unittest. Include planar and non-planar graph examples.
+
+* Use the triangle, tree, cycle, K4, K5, and K3,3 graphs as test cases. Explain why each graph should be classified as planar or non-planar.
+
+* Why does running python -m unittest test_dmp.py show that no tests were run? Help me revise my test file so unittest can properly discover the test cases.
+
+* Help me write an implementation section for the README explaining the structure and workflow of my DMP Python implementation in paragraph format.
+
+* Create sample execution results for both planar and non-planar graphs to demonstrate how the program works.
+
+
