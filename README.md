@@ -84,6 +84,24 @@ The overall process is coordinated by the `test_block_dmp()` and `is_planar_dmp(
 
 Overall, the implementation follows the main idea of the DMP algorithm by gradually constructing a planar embedding through the insertion of fragments into admissible faces. Each function handles a specific stage of the process, making the implementation easier to understand, organize, and maintain.
 
+## Schmidt's Algorithm
+
+The Schmidt Planarity Checker is implemented in Python using an adjacency-list representation of an undirected graph. Each vertex is stored as a key in a dictionary, while its neighboring vertices are stored in a list or set. This structure allows the program to access adjacent vertices and manage graph connections efficiently.
+
+The implementation begins by decomposing the graph into biconnected components, also known as blocks, using Tarjan's Depth-First Search (DFS) technique via the _get_biconnected_components() method. Dividing the graph into smaller components allows the algorithm to process each block independently, ensuring that articulation points or disconnected components do not interfere with the overall planarity assessment.
+
+For each biconnected component, the algorithm performs a Depth-First Search traversal to establish a structural vertex ordering (dfs_order). This ordering ensures that when vertices are added one by one, their tree connections and back-edges link properly to the portion of the graph that has already been processed. A small initial biconnected subgraph is chosen as the base embedding with defined face boundaries.
+
+After establishing the base subgraph, the _test_block_schmidt() method iterates through the remaining vertices in the DFS-derived order. For each incoming vertex, it identifies all incident edges that connect to vertices already present in the embedded subgraph, acting as attachment points or contact vertices.
+
+The algorithm then checks whether the incoming edges and the new vertex can fit into the current face boundaries without crossing any existing lines. It utilizes stack-based and set-based data structures to dynamically manage and track active face segments and stacking states. If the edges cannot be accommodated within the available face boundaries, the embedding fails, and the block is classified as non-planar.
+
+Once a valid placement is confirmed, the new vertex and its connecting edges are embedded into the chosen face, and the face boundaries are updated. This process of adding vertices and updating face structures is repeated until all vertices in the component have been successfully processed.
+
+The overall process is coordinated by the SchmidtPlanarityTest class, where is_planar() manages the processing of all biconnected components and combines their results. If every block can be successfully embedded, the graph is classified as planar. Otherwise, it is classified as non-planar.
+
+Overall, the implementation follows the main idea of Schmidt’s algorithm by dynamically adding vertices one by one using efficient stack structures to manage active faces in optimal linear time. Each method handles a specific stage of the process, making the implementation organized, maintainable, and efficient.
+
 ## How to Run & Prerequisites
 
 ### DMP
